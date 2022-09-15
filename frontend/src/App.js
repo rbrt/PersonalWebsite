@@ -6,40 +6,51 @@ import SkillsContainer from './SkillsContainer.js';
 import PersonalInformation from './PersonalInformation.js';
 import ThreeWrapper from './ThreeWrapper';
 
-import React, { useRef } from "react";
+import React from "react";
 
-function App() {
+export default class App extends React.Component {
 
-    const canvasRef = useRef(null);
+    constructor(props) {
+        super(props);
 
-    if (canvasRef.current !== null){
-        const threeWrapper = new ThreeWrapper(canvasRef);
-        console.log("Made the three wrapper")
+
+        this.state = {
+
+        };
+
+        this.canvasRef = React.createRef();
     }
-    else{
-        console.log(canvasRef.current);
+
+    componentDidMount(){
+        if (this.canvasRef.current !== null){
+            const threeWrapper = new ThreeWrapper(this.canvasRef.current);
+        }
+        else{
+            console.log(this.canvasRef)
+            console.log("Failed to create canvasRef")
+        }
     }
 
-    return (
-        <div className="app">
-            <div className="header-container">
-                <header className="header-text">
-                Header Here
-                </header>
-                <div className="nav-container">
-                <NavBar/>
+    render() {
+        return (
+            <div className="app">
+                <div className="header-container">
+                    <header className="header-text">
+                    Header Here
+                    </header>
+                    <div className="nav-container">
+                    <NavBar/>
+                    </div>
                 </div>
-            </div>
-            <div className="body">
-                <div className="content-container">
-                    <PersonalInformation/>
-                    <SkillsContainer/>
+                <div className="body">
+                    <div className="content-container">
+                        <PersonalInformation/>
+                        <SkillsContainer/>
+                    </div>
                 </div>
 
-                <canvas ref={canvasRef} id="three-canvas"/>
+                <canvas ref={this.canvasRef} id="three-canvas" className="display-canvas"/>
             </div>
-        </div>
-    );
+        );
+    }
 }
-
-export default App;
