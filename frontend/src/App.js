@@ -13,9 +13,16 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
 
+        this.navOptions = {
+            "main": "Main",
+            "career": "Career",
+            "graphics": "Graphics",
+            "hobbies": "Hobbies"
+        }
+
 
         this.state = {
-
+            selectedState: this.navOptions.main
         };
 
         this.canvasRef = React.createRef();
@@ -26,9 +33,13 @@ export default class App extends React.Component {
             const threeWrapper = new ThreeWrapper(this.canvasRef.current);
         }
         else{
-            console.log(this.canvasRef)
-            console.log("Failed to create canvasRef")
+            console.error("Failed to create canvasRef")
         }
+    }
+
+    selectNavButton(newState){
+        console.log(newState)
+        //this.setState({selectedState: newState})
     }
 
     render() {
@@ -36,10 +47,14 @@ export default class App extends React.Component {
             <div className="app">
                 <div className="header-container">
                     <header className="header-text">
-                    Header Here
+                    Robert Butler
                     </header>
                     <div className="nav-container">
-                    <NavBar/>
+                    <NavBar
+                        selectedState={this.state.selectedState}
+                        navOptions={this.navOptions}
+                        selectNavButton={this.selectNavButton}
+                    />
                     </div>
                 </div>
                 <div className="body">

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 
 export default class ThreeWrapper{
+    
     constructor(canvasRef) {
         this.scene = new THREE.Scene();
         this.camera = new THREE.Camera();
@@ -25,23 +26,11 @@ export default class ThreeWrapper{
         this.cube.rotateX(Math.PI / 2 * 0.2)
     }
 
-    // ******************* PUBLIC EVENTS ******************* //
-    updateValue(value) {
-      // Whatever you need to do with React props
-    }
-
-    onMouseMove() {
-      // Mouse moves
-    }
-
     onWindowResize(vpW, vpH) {
         this.renderer.setSize(vpW, vpH);
     }
 
-    // ******************* RENDER LOOP ******************* //
     update(t) {
-
-        //this.rotation = this.rotation + 1;
         this.cube.rotateY(Math.PI / 2 * 0.01);
         this.renderer.render(this.scene, this.camera);
 
